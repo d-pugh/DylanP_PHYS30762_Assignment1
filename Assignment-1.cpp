@@ -1,22 +1,18 @@
-// Assignment 1 - skeleton code
-
-// Program to calculate transition energy using simple Bohr formula
+// Dylan Pugh 11020134
+// 04.02.2026
+// Assignment 1: Program to calculate transition energy using simple Bohr formula: E_ij = 13.6 * Z^2 * [1 / (n_j)^2 - 1/(n_i)^2] eV
+// inputs: Z, n_j, n_i, units (J or eV)
+// outputs: E_ij
 
 #include<iostream>
 #include<iomanip>
 
 int main()
 {
-  // Declare variables here
+  int n_i; //initial energy level
+  int n_j; //final energy level
+  float Z; //atomic number
 
-  // Ask user to enter atomic number
-
-  // Ask user to enter initial and final quantum numbers
-
-  // Compute photon energy, Delta E = 13.6*(Z^2)*(1/n_j^2-1/n_i^2) eV
-
-  // Output answer
-  std::cout << "Here is my answer:" << "42" << std::endl;
 
   return 0;
 }
