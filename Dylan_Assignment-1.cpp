@@ -21,10 +21,25 @@ int main()
   //take inputs
   std::cout<<"Atomic number: ";
   std::cin>>Z;
+  while(std::cin.fail()) //validate input
+  {
+    std::cout<<"invalid input";
+    std::cin.clear();
+    std::cin.ignore();
+    std::cin>>Z;
+  }
+
   std::cout<<"Energy levels: ";
   std::cin>>n_i>>n_j;
-  std::cout<<"Z = "<<Z<<", n_i = "<<n_i<<", n_j = "<<n_j<<std::endl; // check inputs
+  while(std::cin.fail())
+  {
+    std::cout<<"invalid input";
+    std::cin.clear();
+    std::cin.ignore();
+    std::cin>>n_i>>n_j;
+  }
 
+  std::cout<<"Z = "<<Z<<", n_i = "<<n_i<<", n_j = "<<n_j<<std::endl; // check inputs
 
   //calculate E
   double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
