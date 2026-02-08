@@ -13,6 +13,12 @@ int main()
   int n_j; //final energy level
   float Z; //atomic number
 
+  std::cout<<"Atomic number: ";
+  std::cin>>Z;
+  std::cout<<"Energy levels: ";
+  std::cin>>n_i>>n_j;
+  
+  std::cout<<"Z="<<Z<<" n_i="<<n_i<<" n_j="<<n_j<<std::endl; // check inputs
 
   return 0;
 }
