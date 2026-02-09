@@ -10,6 +10,9 @@
 
 #include<iostream>
 #include<iomanip>
+#include<vector>
+
+using namespace std;
 
 int main()
 {
@@ -17,35 +20,52 @@ int main()
   int n_i{1}; //initial energy level
   int n_j{1}; //final energy level 
   int Z{0}; //atomic number
+  
+  //take and validate inputs
+  string Z_input; // take input as string
 
-  //take inputs
-  std::cout<<"Atomic number: ";
-  std::cin>>Z;
-  while(std::cin.fail()) //validate input
-  {
-    std::cout<<"invalid input";
-    std::cin.clear();
-    std::cin.ignore();
-    std::cin>>Z;
+  bool inputs_valid{false}; //request inputs until this is true
+  bool is_integer{false}; //assume input is non-integer
+
+  while(inputs_valid == false){
+    cout<<"Atomic number: ";
+    cin>>Z_input;
+    is_integer=true;
+
+    if(Z_input.empty()) //if no input, ask again
+     {      
+      is_integer=false; 
+     }
+  
+
+    
+    for(int i=0; i<=Z_input.length()-1; i++){ //checks each element of the string is an integer
+      if(isdigit(Z_input[i])==0){
+        is_integer=false;
+      } 
+    }
+
+
+    if(is_integer==true){ //if all elements are integers, input is valid
+      inputs_valid=true;
+      cout<<"valid input"<<endl;
+    }
   }
+  
 
-  std::cout<<"Energy levels: ";
-  std::cin>>n_i>>n_j;
-  while(std::cin.fail())
-  {
-    std::cout<<"invalid input";
-    std::cin.clear();
-    std::cin.ignore();
-    std::cin>>n_i>>n_j;
-  }
 
-  std::cout<<"Z = "<<Z<<", n_i = "<<n_i<<", n_j = "<<n_j<<std::endl; // check inputs
+//  cout<<"Energy levels: ";
+  //cin>>n_i>>n_j;
+  //while(cin.fail())
+
+
+// cout<<"Z = "<<Z<<", n_i = "<<n_i<<", n_j = "<<n_j<<endl; // check inputs
 
   //calculate E
-  double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
+  //double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
 
   //output result
-  std::cout<<"Transition energy = "<<E<<" eV"<<std::endl;
+ // cout<<"Transition energy = "<<E<<" eV"<<endl;
 
   return 0;
 }
