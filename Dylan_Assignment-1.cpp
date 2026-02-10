@@ -65,7 +65,7 @@ int main()
 
   }
 
-
+Z = stoi(Z_input); //convert string to integer
 
 //  cout<<"Energy levels: ";
   //cin>>n_i>>n_j;
