@@ -43,42 +43,53 @@ int main()
   
   //take and validate inputs
   string Z_input; // take input as string
+  string n_i_input; // take input as string
+  string n_j_input; // take input as string
 
-  bool inputs_valid{false}; //request inputs until this is true
-
-  while(inputs_valid == false)
+  cout<<"Atomic number: ";
+  cin>>Z_input;
+  while(is_integer(Z_input)==false) //check if input is an integer
   {
+    cin.ignore();
+    cin.clear();
+    cout<<"Invalid input"<<endl;
     cout<<"Atomic number: ";
     cin>>Z_input;
-  
-    if(is_integer(Z_input)==true)
-    {
-      inputs_valid=true;
-      cout<<"Valid input"<<endl;
-    }
-    else
-    {
-      cin.ignore();
-      cin.clear();
-      cout<<"Invalid input"<<endl;
-    } 
-
   }
 
-Z = stoi(Z_input); //convert string to integer
+  cout<<"Higher energy level (n_i): ";
+  cin>>n_i_input;
+  while(is_integer(n_i_input)==false) //check if input is an integer
+  {
+    cin.ignore();
+    cin.clear();
+    cout<<"Invalid input"<<endl;
+    cout<<"Higher energy level (n_i): ";
+    cin>>n_i_input;
+  }
 
-//  cout<<"Energy levels: ";
-  //cin>>n_i>>n_j;
-  //while(cin.fail())
+   cout<<"Higher energy level (n_j): ";
+  cin>>n_j_input;
+  while(is_integer(n_j_input)==false) //check if input is an integer
+  {
+    cin.ignore();
+    cin.clear();
+    cout<<"Invalid input"<<endl;
+    cout<<"Higher energy level (n_j): ";
+    cin>>n_j_input;
+  }
 
+  //convert string inputs to integers
+  Z = stoi(Z_input);
+  n_i = stoi(n_i_input); 
+  n_j = stoi(n_j_input);
 
-// cout<<"Z = "<<Z<<", n_i = "<<n_i<<", n_j = "<<n_j<<endl; // check inputs
 
   //calculate E
-  //double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
+  double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
 
   //output result
- // cout<<"Transition energy = "<<E<<" eV"<<endl;
+  cout<<"Transition energy = "<<E<<" eV"<<endl;
 
   return 0;
 }
