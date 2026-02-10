@@ -15,6 +15,7 @@
 
 using namespace std;
 
+//functions
 bool is_integer(string input){
   //function to check if a string containts an integer value
   //returns true if string contains only integers, false otherwise
@@ -46,87 +47,102 @@ double eV_to_J(double E_eV){
   return E_J;
 }
 
+
 int main()
 {
   //declare and initialise variables
-  int n_i{1}; //initial energy level
-  int n_j{1}; //final energy level 
+  int n_i{1}; //initial quantum number
+  int n_j{1}; //final quantum number
   int Z{0}; //atomic number
   double E{0}; //transition energy
+  bool repeat{true}; //boolean variable to control repetition of the program
   
   //take and validate inputs
   string Z_input; // take input as string
   string n_i_input; // take input as string
   string n_j_input; // take input as string
 
-  cout<<"Atomic number: ";
-  cin>>Z_input;
-  while(is_integer(Z_input)==false) //check if input is an integer
+  while(repeat == true)
   {
-    cin.ignore();
-    cin.clear();
-    cout<<"Invalid input"<<endl;
     cout<<"Atomic number: ";
     cin>>Z_input;
-  }
+    while(is_integer(Z_input)==false) //check if input is an integer
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+      cout<<"Atomic number: ";
+      cin>>Z_input;
+    }
 
-  cout<<"Higher energy level (n_i): ";
-  cin>>n_i_input;
-  while(is_integer(n_i_input)==false) //check if input is an integer
-  {
-    cin.ignore();
-    cin.clear();
-    cout<<"Invalid input"<<endl;
-    cout<<"Higher energy level (n_i): ";
+    cout<<"Higher quantum number (n_i): ";
     cin>>n_i_input;
-  }
+    while(is_integer(n_i_input)==false) //check if input is an integer
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+      cout<<"Higher quantum number (n_i): ";
+      cin>>n_i_input;
+    }
 
-   cout<<"Higher energy level (n_j): ";
-  cin>>n_j_input;
-  while(is_integer(n_j_input)==false) //check if input is an integer
-  {
-    cin.ignore();
-    cin.clear();
-    cout<<"Invalid input"<<endl;
-    cout<<"Higher energy level (n_j): ";
+    cout<<"Higher quantum number (n_j): ";
     cin>>n_j_input;
-  }
+    while(is_integer(n_j_input)==false) //check if input is an integer
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+      cout<<"Higher quantum number (n_j): ";
+      cin>>n_j_input;
+    }
 
-  //convert string inputs to integers
-  Z = stoi(Z_input);
-  n_i = stoi(n_i_input); 
-  n_j = stoi(n_j_input);
+    //convert string inputs to integers
+    Z = stoi(Z_input);
+    n_i = stoi(n_i_input); 
+    n_j = stoi(n_j_input);
 
-  //ask user for energy units
-  string units;
-  cout<<"Display energy in (J/eV): ";
-  cin>>units;
-  while(units != "J" && units != "eV") //check if input is either J or eV
-  {
-    cin.ignore();
-    cin.clear();
-    cout<<"Invalid input"<<endl;
-    cout<<"Preferred energy units (J/eV): ";
+
+    //ask user for energy units
+    string units;
+    cout<<"Display energy in (J/eV): ";
     cin>>units;
-  }
+    while(units != "J" && units != "eV") //check if input is either J or eV
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+      cout<<"Preferred energy units (J/eV): ";
+      cin>>units;
+    }
 
-  //calculate E
-  E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
-  if(units=="J"){
-    //calculate E in eV and convert to J
-    E = eV_to_J(E);
-    cout<<"Transition energy = "<<E<<" J"<<endl;
-  }
-  else{
-    cout<<"Transition energy = "<<E<<" eV"<<endl;
-  }
+    //calculate E
+    E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
+    if(units=="J"){
+      //calculate E in eV and convert to J
+      E = eV_to_J(E);
+      cout<<"Transition energy = "<<E<<" J"<<endl;
+    }
+    else{
+      cout<<"Transition energy = "<<E<<" eV"<<endl;
+    }
   
+    //ask user if they want to repeat the program
+    string repeat_program;
+    cout<<"Repeat program? (y/n): ";
+    cin>>repeat_program;
+    while(units != "y" && units != "n") //check if input is either y or n
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+      cout<<"Repeat program? (y/n): ";
+      cin>>repeat_program;
+    }
+    if(repeat_program == "n"){
+      repeat = false;
+    }
 
-
-  //calculate E
-  E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
-
-  //output result
-
+  }
   return 0;
 }
