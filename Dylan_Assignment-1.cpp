@@ -3,8 +3,8 @@
 // Assignment 1: Program to calculate transition energy using simple Bohr formula: E_ij = 13.6 * Z^2 * [1/(n_j)^2 - 1/(n_i)^2] eV
 // inputs: Z, n_i, n_j (n_j<n_i), units (J or eV)
 // outputs: E_ij
-// Task:  Ask the user to enter the atomic number, initial and final quantum numbers, and whether to 
-//        display the calculated energy of the transition in Joules or electron volts.
+// Task:  Ask the user to enter the atomic number, initial and final quantum numbers, and 
+//        whether to display the calculated energy of the transition in Joules or electron volts.
 //        After the calculated value is shown, ask whether to repeat (“y/n”) and stop on “n”
 //        Check at each stage for incorrect inputs (either in format or violating some physical conditions)
 
@@ -129,14 +129,14 @@ int main()
   
     //ask user if they want to repeat the program
     string repeat_program;
-    cout<<"Repeat program? (y/n): ";
+    cout<<"Repeat calculation? (y/n): ";
     cin>>repeat_program;
-    while(units != "y" && units != "n") //check if input is either y or n
+    while(repeat_program != "y" && repeat_program != "n") //check if input is either y or n
     {
       cin.ignore();
       cin.clear();
       cout<<"Invalid input"<<endl;
-      cout<<"Repeat program? (y/n): ";
+      cout<<"Repeat calculation? (y/n): ";
       cin>>repeat_program;
     }
     if(repeat_program == "n"){
@@ -146,3 +146,8 @@ int main()
   }
   return 0;
 }
+
+//Check n_i>n_j condition satisfied
+//Double check Z, n_i,n_j are positive integers
+//Add comments
+//Consider additional features
