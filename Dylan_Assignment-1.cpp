@@ -17,6 +17,7 @@ using namespace std;
 
 bool is_integer(string input){
   //function to check if a string containts an integer value
+  //returns true if string contains only integers, false otherwise
   bool int_only{true};
 
   if(input.empty()) //if no input, ask again
@@ -31,7 +32,18 @@ bool is_integer(string input){
       }
     }
   return int_only;
+}
 
+double transition_energy(int Z, int n_i, int n_j){
+  //function to calculate transition energy using formula E_ij = 13.6 * Z^2 * [1/(n_j)^2 - 1/(n_i)^2] eV
+    double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
+    return E;
+}
+
+double eV_to_J(double E_eV){
+  //function to convert energy from eV to J using conversion factor 1 eV = 1.60218e-19 J
+  double E_J = E_eV * 1.60218e-19;
+  return E_J;
 }
 
 int main()
@@ -40,6 +52,7 @@ int main()
   int n_i{1}; //initial energy level
   int n_j{1}; //final energy level 
   int Z{0}; //atomic number
+  double E{0}; //transition energy
   
   //take and validate inputs
   string Z_input; // take input as string
@@ -86,7 +99,7 @@ int main()
 
 
   //calculate E
-  double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
+  E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
 
   //output result
   cout<<"Transition energy = "<<E<<" eV"<<endl;
