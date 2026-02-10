@@ -97,12 +97,36 @@ int main()
   n_i = stoi(n_i_input); 
   n_j = stoi(n_j_input);
 
+  //ask user for energy units
+  string units;
+  cout<<"Display energy in (J/eV): ";
+  cin>>units;
+  while(units != "J" && units != "eV") //check if input is either J or eV
+  {
+    cin.ignore();
+    cin.clear();
+    cout<<"Invalid input"<<endl;
+    cout<<"Preferred energy units (J/eV): ";
+    cin>>units;
+  }
+
+  //calculate E
+  E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
+  if(units=="J"){
+    //calculate E in eV and convert to J
+    E = eV_to_J(E);
+    cout<<"Transition energy = "<<E<<" J"<<endl;
+  }
+  else{
+    cout<<"Transition energy = "<<E<<" eV"<<endl;
+  }
+  
+
 
   //calculate E
   E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
 
   //output result
-  cout<<"Transition energy = "<<E<<" eV"<<endl;
 
   return 0;
 }
