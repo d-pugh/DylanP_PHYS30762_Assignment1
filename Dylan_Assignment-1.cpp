@@ -10,9 +10,29 @@
 
 #include<iostream>
 #include<iomanip>
-#include<vector>
+#include<string>
+#include<sstream>
 
 using namespace std;
+
+bool is_integer(string input){
+  //function to check if a string containts an integer value
+  bool int_only{true};
+
+  if(input.empty()) //if no input, ask again
+     {      
+      return false; 
+     }
+
+
+  for(int i=0; i<=input.length()-1; i++){ //checks each element of the string is an integer
+      if(isdigit(input[i])==0){  //isdigit returns 0 for non-digit values
+        int_only = false;
+      }
+    }
+  return int_only;
+
+}
 
 int main()
 {
@@ -25,33 +45,26 @@ int main()
   string Z_input; // take input as string
 
   bool inputs_valid{false}; //request inputs until this is true
-  bool is_integer{false}; //assume input is non-integer
 
-  while(inputs_valid == false){
+  while(inputs_valid == false)
+  {
     cout<<"Atomic number: ";
     cin>>Z_input;
-    is_integer=true;
-
-    if(Z_input.empty()) //if no input, ask again
-     {      
-      is_integer=false; 
-     }
   
-
-    
-    for(int i=0; i<=Z_input.length()-1; i++){ //checks each element of the string is an integer
-      if(isdigit(Z_input[i])==0){
-        is_integer=false;
-      } 
-    }
-
-
-    if(is_integer==true){ //if all elements are integers, input is valid
+    if(is_integer(Z_input)==true)
+    {
       inputs_valid=true;
-      cout<<"valid input"<<endl;
+      cout<<"Valid input"<<endl;
     }
+    else
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+    } 
+
   }
-  
+
 
 
 //  cout<<"Energy levels: ";
