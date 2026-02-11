@@ -1,5 +1,5 @@
 // Dylan Pugh 11020134
-// 08.02.2026
+// 11.02.2026
 // Assignment 1: Program to calculate transition energy using simple Bohr formula: E_ij = 13.6 * Z^2 * [1/(n_j)^2 - 1/(n_i)^2] eV
 // inputs: Z, n_i, n_j (n_j<n_i), units (J or eV)
 // outputs: E_ij
@@ -29,9 +29,11 @@ bool is_integer(string input){
      }
 
 
-  for(int i=0; i<=input.length()-1; i++){ //checks each element of the string is an integer
-      if(isdigit(input[i])==0){  //isdigit returns 0 for non-digit values
-        int_only = false;
+  for(int i=0; i<=input.length()-1; i++) //checks each element of the string
+  { 
+      if(isdigit(input[i])==0)//isdigit returns 0 for non-digit values
+      {  
+        int_only = false; //return false if any element is non-digit, therefore non-integer
       }
     }
   return int_only;
@@ -48,6 +50,8 @@ double transition_energy(int Z, int n_i, int n_j){
 
 double eV_to_J(double E_eV){
   //converts energy from eV to J using conversion factor 1 eV = 1.60218e-19 J
+  //returns E_J in Joules
+
   double E_J = E_eV * 1.60218e-19;
   return E_J;
 }
@@ -57,8 +61,10 @@ double wavelength(double E){
   //calculates wavelength L using fomula L=hc/E
   //returns L in metres
 
+  double h{6.62607015e-34};
+  double c{299792458};
   double E_J = eV_to_J(E);
-  double L = (6.62607015e-34 * 299792458)/E_J;
+  double L = (h*c)/E_J;
   return L;
 }
 
@@ -66,7 +72,7 @@ double wavelength(double E){
 
 int main()
 {
-  //declare and initialise variables
+  //declare and initialise main variables
   int n_i{1}; //initial quantum number
   int n_j{1}; //final quantum number
   int Z{0}; //atomic number
@@ -123,7 +129,8 @@ int main()
     n_j = stoi(n_j_input);
 
     //check if quantum numbers make physical sense
-    if(n_i<n_j){
+    if(n_i<n_j)
+    {
       cin.ignore();
       cin.clear();
       cout<<"n_j must be less than n_i for photon emission."<<endl;
@@ -150,12 +157,14 @@ int main()
   
     //calculate E
     double E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
-    if(units=="J"){
+    if(units=="J")
+    {
       //calculate E in eV and convert to J
       double E_J = eV_to_J(E);
       cout<<"Transition energy = "<<E_J<<" J"<<endl;
     }
-    else{
+    else
+    {
       cout<<"Transition energy = "<<E<<" eV"<<endl;
     }
 
@@ -171,7 +180,8 @@ int main()
       cout<<"Would you like to calculate the wavelength of the emitted photon? (y/n)";
       cin>>calculate_wavelength;
     }
-    if(calculate_wavelength == "y"){
+    if(calculate_wavelength == "y")
+    {
       double Lambda = wavelength(E);
       cout<<"Emitted photon wavelength = "<<Lambda<<" m"<<endl;
     }
@@ -188,14 +198,11 @@ int main()
       cout<<"Repeat calculation? (y/n): ";
       cin>>repeat_program;
     }
-    if(repeat_program == "n"){
+    if(repeat_program == "n")
+    {
       repeat = false;
     }
 
   }
   return 0;
 }
-
-
-//Add comments
-//Consider additional features
