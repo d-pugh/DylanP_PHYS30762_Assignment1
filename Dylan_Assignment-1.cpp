@@ -20,7 +20,7 @@ bool is_integer(string input){
   //returns true if string contains only digits and is therefore an integer, 
   //returns false otherwise
   //this will also reject -ve numbers, since "-" is not an integer
-  
+
   bool int_only{true};
 
   if(input.empty()) //if no input, ask again
@@ -37,17 +37,31 @@ bool is_integer(string input){
   return int_only;
 }
 
+
 double transition_energy(int Z, int n_i, int n_j){
-  //function to calculate transition energy using formula E_ij = 13.6 * Z^2 * [1/(n_j)^2 - 1/(n_i)^2] eV
+  //calculates transition energy in eV using formula E_ij = 13.6 * Z^2 * [1/(n_j)^2 - 1/(n_i)^2] eV
+
     double E = 13.6 * Z*Z * (1.0/(n_j*n_j) - 1.0/(n_i*n_i)); //should be floating point division not integer division
     return E;
 }
 
+
 double eV_to_J(double E_eV){
-  //function to convert energy from eV to J using conversion factor 1 eV = 1.60218e-19 J
+  //converts energy from eV to J using conversion factor 1 eV = 1.60218e-19 J
   double E_J = E_eV * 1.60218e-19;
   return E_J;
 }
+
+
+double wavelength(double E){
+  //calculates wavelength L using fomula L=hc/E
+  //returns L in metres
+
+  double E_J = eV_to_J(E);
+  double L = (6.62607015e-34 * 299792458)/E_J;
+  return L;
+}
+
 
 
 int main()
@@ -135,16 +149,33 @@ int main()
 
   
     //calculate E
-    E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
+    double E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
     if(units=="J"){
       //calculate E in eV and convert to J
-      E = eV_to_J(E);
-      cout<<"Transition energy = "<<E<<" J"<<endl;
+      double E_J = eV_to_J(E);
+      cout<<"Transition energy = "<<E_J<<" J"<<endl;
     }
     else{
       cout<<"Transition energy = "<<E<<" eV"<<endl;
     }
-  
+
+    //ask user if they want to calculate frequency
+    string calculate_wavelength;
+    cout<<"Would you like to calculate the wavelength of the emitted photon? (y/n)";
+    cin>>calculate_wavelength;
+    while(calculate_wavelength != "y" && calculate_wavelength != "n") //check if input is either y or n
+    {
+      cin.ignore();
+      cin.clear();
+      cout<<"Invalid input"<<endl;
+      cout<<"Would you like to calculate the wavelength of the emitted photon? (y/n)";
+      cin>>calculate_wavelength;
+    }
+    if(calculate_wavelength == "y"){
+      double Lambda = wavelength(E);
+      cout<<"Emitted photon wavelength = "<<Lambda<<" m"<<endl;
+    }
+
     //ask user if they want to repeat the program
     string repeat_program;
     cout<<"Repeat calculation? (y/n): ";
