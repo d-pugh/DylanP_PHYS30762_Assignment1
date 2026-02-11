@@ -17,8 +17,10 @@ using namespace std;
 
 //functions
 bool is_integer(string input){
-  //function to check if a string containts an integer value
-  //returns true if string contains only integers, false otherwise
+  //returns true if string contains only digits and is therefore an integer, 
+  //returns false otherwise
+  //this will also reject -ve numbers, since "-" is not an integer
+  
   bool int_only{true};
 
   if(input.empty()) //if no input, ask again
@@ -74,7 +76,12 @@ int main()
       cout<<"Atomic number: ";
       cin>>Z_input;
     }
+    Z = stoi(Z_input); //convert string input to integer
 
+
+    bool valid_quantum_numbers{false};
+    while(valid_quantum_numbers == false) //loop until n_i>n_j condition satisfied
+    {
     cout<<"Higher quantum number (n_i): ";
     cin>>n_i_input;
     while(is_integer(n_i_input)==false) //check if input is an integer
@@ -86,22 +93,32 @@ int main()
       cin>>n_i_input;
     }
 
-    cout<<"Higher quantum number (n_j): ";
+    cout<<"Lower quantum number (n_j): ";
     cin>>n_j_input;
     while(is_integer(n_j_input)==false) //check if input is an integer
     {
       cin.ignore();
       cin.clear();
       cout<<"Invalid input"<<endl;
-      cout<<"Higher quantum number (n_j): ";
+      cout<<"Lower quantum number (n_j): ";
       cin>>n_j_input;
     }
 
     //convert string inputs to integers
-    Z = stoi(Z_input);
     n_i = stoi(n_i_input); 
     n_j = stoi(n_j_input);
 
+    //check if quantum numbers make physical sense
+    if(n_i<n_j){
+      cin.ignore();
+      cin.clear();
+      cout<<"n_j must be less than n_i for photon emission."<<endl;
+      cout<<"Please re-enter quantum numbers."<<endl;
+    }
+    else{
+      valid_quantum_numbers=true;
+      }
+    }
 
     //ask user for energy units
     string units;
@@ -116,6 +133,7 @@ int main()
       cin>>units;
     }
 
+  
     //calculate E
     E = transition_energy(Z, n_i, n_j); //should be floating point division not integer division
     if(units=="J"){
@@ -147,7 +165,6 @@ int main()
   return 0;
 }
 
-//Check n_i>n_j condition satisfied
-//Double check Z, n_i,n_j are positive integers
+
 //Add comments
 //Consider additional features
