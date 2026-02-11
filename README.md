@@ -1,3 +1,4 @@
+Dylan Pugh 11020134
 Assignment 1: Calculate photon energies of electron transition in Bohr atom model.
 
 1. Allowed user to input Z, n_i and n_j, and performed energy calculation E = 13.6 * Z^2 * [1/(n_j)^2 - 1/(n_i)^2] eV
