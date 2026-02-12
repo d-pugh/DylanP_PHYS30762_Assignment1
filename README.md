@@ -7,3 +7,20 @@ Assignment 1: Calculate photon energies of electron transition in Bohr atom mode
 4. Put main code into a while loop to allow user to repeat the calculation.
 5. Added restriction to enforce n_i>n_j, in order to ensure non-negative photon energies.
 6. Added extra option to calculate wavelength corresponding to the transition energy.
+
+
+
+
+
+Disclosure of Delegation to Generative AI
+
+The authors declare the use of generative AI in the research and writing process. According to the GAIDeT taxonomy (2025), the following tasks were delegated to GAI tools under full human supervision:
+
+- Idea generation
+- Code optimization
+
+The GAI tool used was: Microsoft Copilot.
+Responsibility for the final manuscript lies entirely with the authors.
+GAI tools are not listed as authors and do not bear responsibility for the final outcomes.
+Declaration submitted by: Dylan Pugh
+Additional note: I used Copilot to generate ideas on how best to validate input in c++. (No code was copy and pas
