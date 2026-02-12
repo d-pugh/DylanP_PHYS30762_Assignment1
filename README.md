@@ -23,4 +23,4 @@ The GAI tool used was: Microsoft Copilot.
 Responsibility for the final manuscript lies entirely with the authors.
 GAI tools are not listed as authors and do not bear responsibility for the final outcomes.
 Declaration submitted by: Dylan Pugh
-Additional note: I used Copilot to generate ideas on how best to validate input in c++. (No code was copy and pas
+Additional note: I used Copilot to generate ideas on how best to validate input in c++. No code was copy and pasted or directly written by AI.
